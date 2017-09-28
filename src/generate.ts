@@ -14,10 +14,11 @@ import { generateSource as generateFlowSource } from './flow';
 import { generateSource as generateFlowModernSource } from './javascript/flow';
 import { generateSource as generateTypescriptModernSource } from './javascript/typescript';
 import { generateSource as generateScalaSource } from './scala';
+import { generateSource as generateRealmSource } from './realm';
 
 type TargetType = 'json' | 'swift' | 'ts' | 'typescript'
   | 'flow' | 'scala' | 'flow-modern' | 'typescript-modern'
-  | 'ts-modern';
+  | 'ts-modern' | 'realm';
 
 export default function generate(
   inputPaths: string[],
@@ -54,6 +55,7 @@ export default function generate(
     if (options.generateOperationIds) {
       writeOperationIdsMap(context);
     }
+<<<<<<< HEAD
   }
   else if (target === 'flow-modern' || target === 'typescript-modern' || target === 'ts-modern') {
     const context = compileToIR(schema, document, options);
@@ -89,6 +91,13 @@ export default function generate(
       });
   }
   else {
+=======
+  } else if (target === 'realm') {
+    options.addTypename = true;
+    const context = compileToIR(schema, document, options);
+    output = generateRealmSource(context);
+  } else {
+>>>>>>> Got realm generation working
     let output;
     const context = compileToLegacyIR(schema, document, options);
     switch (target) {
@@ -104,6 +113,7 @@ export default function generate(
         break;
       case 'scala':
         output = generateScalaSource(context, options);
+        break;
     }
 
     if (outputPath) {
