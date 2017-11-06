@@ -38,7 +38,6 @@ export default function generate(
 
   validateQueryDocument(schema, document);
 
-  let output;
   if (target === 'swift') {
     options.addTypename = true;
     const context = compileToIR(schema, document, options);
@@ -52,7 +51,6 @@ export default function generate(
     } else {
       fs.writeFileSync(outputPath, generator.output);
     }
-
     if (options.generateOperationIds) {
       writeOperationIdsMap(context);
     }
@@ -100,6 +98,10 @@ export default function generate(
     switch (target) {
       case 'json':
         output = serializeToJSON(context);
+        break;
+      case 'realm':
+        const context = compileToIR(schema, document, options);
+        output = generateRealmSource(context);
         break;
       case 'ts':
       case 'typescript':
