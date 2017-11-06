@@ -4,10 +4,8 @@ import { join, wrap } from '../utilities/printing';
 
 import {
   GraphQLType,
-  isOutputType,
   GraphQLObjectType,
   GraphQLScalarType,
-  GraphQLField,
   GraphQLString,
   GraphQLBoolean,
   GraphQLInt,
@@ -17,12 +15,6 @@ import {
   GraphQLList,
   GraphQLNonNull
 } from 'graphql';
-
-import {
-  optionalVariableDeclarator,
-  nonOptionalVariableDeclarator,
-  builtInScalarMap
-} from './helpers'
 
 export interface Class {
   className: string;

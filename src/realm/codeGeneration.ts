@@ -2,7 +2,6 @@ import {
   GraphQLType,
   isOutputType,
   GraphQLObjectType,
-  GraphQLScalarType,
   GraphQLField,
   GraphQLNonNull
 } from 'graphql';
@@ -68,8 +67,7 @@ export class RealmModelGenerator extends SwiftGenerator<CompilerContext> {
   }
 
   generateOutputObjectForType(type: GraphQLObjectType) {
-    const classPrefix = ""
-    const className = classPrefix + type.name
+    const className = type.name
 
     this.classDeclaration(
       {
@@ -79,13 +77,13 @@ export class RealmModelGenerator extends SwiftGenerator<CompilerContext> {
       },
       () => {
         Object.values(type.getFields()).forEach(field => {
-          this.generateFieldDeclaration(field, classPrefix)
+          this.generateFieldDeclaration(field)
         });
       }
     );
   }
 
-  generateFieldDeclaration(field: GraphQLField<any, any>, classPrefix: String) {
+  generateFieldDeclaration(field: GraphQLField<any, any>) {
     if (field.description != null) {
       this.comment(field.description)
     }

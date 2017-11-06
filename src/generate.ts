@@ -38,6 +38,7 @@ export default function generate(
 
   validateQueryDocument(schema, document);
 
+  let output;
   if (target === 'swift') {
     options.addTypename = true;
     const context = compileToIR(schema, document, options);
@@ -55,7 +56,6 @@ export default function generate(
     if (options.generateOperationIds) {
       writeOperationIdsMap(context);
     }
-<<<<<<< HEAD
   }
   else if (target === 'flow-modern' || target === 'typescript-modern' || target === 'ts-modern') {
     const context = compileToIR(schema, document, options);
@@ -89,15 +89,12 @@ export default function generate(
           outputDirectory
         );
       });
-  }
-  else {
-=======
   } else if (target === 'realm') {
     options.addTypename = true;
     const context = compileToIR(schema, document, options);
     output = generateRealmSource(context);
-  } else {
->>>>>>> Got realm generation working
+  }  else {
+
     let output;
     const context = compileToLegacyIR(schema, document, options);
     switch (target) {
