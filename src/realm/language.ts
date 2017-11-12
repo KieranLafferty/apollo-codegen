@@ -157,8 +157,8 @@ export class SwiftGenerator<Context> extends CodeGenerator<Context, { typeName: 
     if (isList) {
       this.printOnNewline(`let ${propertyName} = List<${typeName}>()`);
     } else if (type instanceof GraphQLObjectType) {
-      // dynamic var value: Class?
-      this.printOnNewline(`dynamic var ${propertyName}: ${typeName}?`);
+      // @objc dynamic var value: Class?
+      this.printOnNewline(`@objc dynamic var ${propertyName}: ${typeName}?`);
     } else if (type instanceof GraphQLScalarType) {
       switch (type.name) {
         case GraphQLBoolean.name: {
@@ -166,8 +166,8 @@ export class SwiftGenerator<Context> extends CodeGenerator<Context, { typeName: 
             // let value = RealmOptional<Bool>()
             this.printOnNewline(`let ${propertyName} = RealmOptional<Bool>()`);
           } else {
-            // dynamic var value = false
-            this.printOnNewline(`dynamic var ${propertyName} = false`);
+            // @objc dynamic var value = false
+            this.printOnNewline(`@objc dynamic var ${propertyName} = false`);
           }
         }
         break
@@ -176,8 +176,8 @@ export class SwiftGenerator<Context> extends CodeGenerator<Context, { typeName: 
             // let value = RealmOptional<Int>()
             this.printOnNewline(`let ${propertyName} = RealmOptional<Int>()`);
           } else {
-            // dynamic var value = false
-            this.printOnNewline(`dynamic var ${propertyName} = 0`);
+            // @objc dynamic var value = false
+            this.printOnNewline(`@objc dynamic var ${propertyName} = 0`);
           }
         }
         break
@@ -186,28 +186,28 @@ export class SwiftGenerator<Context> extends CodeGenerator<Context, { typeName: 
             // let value = RealmOptional<Float>()
             this.printOnNewline(`let ${propertyName} = RealmOptional<Float>()`);
           } else {
-            // dynamic var value: Float = 0.0
-            this.printOnNewline(`dynamic var ${propertyName}: Float = 0.0`);
+            // @objc dynamic var value: Float = 0.0
+            this.printOnNewline(`@objc dynamic var ${propertyName}: Float = 0.0`);
           }
         }
         break
         case GraphQLString.name: {
           if (isOptional) {
-            // dynamic var value: String? = nil
-            this.printOnNewline(`dynamic var ${propertyName}: String? = nil`);
+            // @objc dynamic var value: String? = nil
+            this.printOnNewline(`@objc dynamic var ${propertyName}: String? = nil`);
           } else {
-            // dynamic var value = ""
-            this.printOnNewline(`dynamic var ${propertyName} = ""`);
+            // @objc dynamic var value = ""
+            this.printOnNewline(`@objc dynamic var ${propertyName} = ""`);
           }
         }
         break
         case GraphQLID.name: {
           if (isOptional) {
-            // dynamic var value: String? = nil
-            this.printOnNewline(`dynamic var ${propertyName}: String? = nil`);
+            // @objc dynamic var value: String? = nil
+            this.printOnNewline(`@objc dynamic var ${propertyName}: String? = nil`);
           } else {
-            // dynamic var value = ""
-            this.printOnNewline(`dynamic var ${propertyName} = ""`);
+            // @objc dynamic var value = ""
+            this.printOnNewline(`@objc dynamic var ${propertyName} = ""`);
           }
           this.printOnNewline(`override public static func primaryKey() -> String?`)
           this.withinBlock(() => {
@@ -220,7 +220,7 @@ export class SwiftGenerator<Context> extends CodeGenerator<Context, { typeName: 
         }
       }
     } else if (type instanceof GraphQLEnumType){
-      this.printOnNewline(`dynamic var ${propertyName}: String? = nil`);
+      this.printOnNewline(`@objc dynamic var ${propertyName}: String? = nil`);
     }
   }
 

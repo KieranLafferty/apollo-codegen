@@ -32,19 +32,19 @@ export const builtInScalarMap = {
 };
 
 export const nonOptionalVariableDeclarator = {
-  [GraphQLBoolean.name]: 'dynamic var',
-  [GraphQLInt.name]: 'dynamic var',
-  [GraphQLFloat.name]: 'dynamic var',
-  [GraphQLObjectType.name]: 'dynamic var',
-  [GraphQLString.name]: 'dynamic var',
+  [GraphQLBoolean.name]: '@objc dynamic var',
+  [GraphQLInt.name]: '@objc dynamic var',
+  [GraphQLFloat.name]: '@objc dynamic var',
+  [GraphQLObjectType.name]: '@objc dynamic var',
+  [GraphQLString.name]: '@objc dynamic var',
   [GraphQLList.name]: 'let',
 };
 export const optionalVariableDeclarator = {
   [GraphQLBoolean.name]: 'let',
   [GraphQLInt.name]: 'let',
   [GraphQLFloat.name]: 'let',
-  [GraphQLObjectType.name]: 'dynamic var',
-  [GraphQLString.name]: 'dynamic var',
+  [GraphQLObjectType.name]: '@objc dynamic var',
+  [GraphQLString.name]: '@objc dynamic var',
   [GraphQLList.name]: 'let',
 };
 
